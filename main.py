@@ -10,8 +10,7 @@ codeql_languages = ["cpp", "csharp", "go", "java", "javascript", "python", "ruby
 # Connect to the languages API and return languages
 def get_languages():
     headers = {'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github.v3+json'}
-    url = os.environ.get(endpoint)
-    response = requests.get(url, headers=headers)
+    response = requests.get(endpoint, headers=headers)
     return response.json()
 
 def build_languages_list(languages):
