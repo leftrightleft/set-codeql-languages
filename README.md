@@ -1,3 +1,3 @@
 # set-codeql-languages
 
-identifies languages
+identifies languages. 
