@@ -5,7 +5,7 @@ import sys
 
 token = sys.argv[0]
 endpoint = sys.argv[1]
-codeql_languages = json.loads(sys.argv[2])
+# codeql_languages = json.loads(sys.argv[2])
 
 print(endpoint)
 # Connect to the languages API and return languages
