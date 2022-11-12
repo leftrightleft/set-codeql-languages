@@ -1,20 +1,16 @@
 # action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+name: 'Set CodeQL Languages'
+description: 'Auto-populate the Actions matrix definition to include languages for CodeQL'
 inputs:
-  access-token:  # id of input
+  access-token:  
     description: 'github token'
     required: true
   endpoint:
-    description: 'languages endpoint'
+    description: 'languages API endpoint'
     required: true
-#   codeql-languages:
-#     description: "languages supported by codeql"
-#     required: false
-#     default: '["cpp", "csharp", "go", "java", "javascript", "python", "ruby"]'
 outputs:
-  languages: # id of output
-    description: 'languages for the matrix'
+  languages:
+    description: 'List of languages that will set the job matrix'
 runs:
   using: 'docker'
   image: 'Dockerfile'
@@ -22,5 +18,4 @@ runs:
    - ${{ inputs.access-token }}
    - ${{ inputs.endpoint }}
    - ${{ inputs.codeql-languages }}
-  # args:
-  #   - ${{ inputs.who-to-greet }}
+
