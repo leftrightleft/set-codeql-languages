@@ -7,6 +7,7 @@ token = sys.argv[0]
 endpoint = sys.argv[1]
 codeql_languages = json.loads(sys.argv[2])
 
+print(endpoint)
 # Connect to the languages API and return languages
 def get_languages():
     headers = {'Authorization': 'Bearer ' + token, 'Accept': 'application/vnd.github.v3+json'}
