@@ -1,0 +1,26 @@
+# action.yml
+name: 'Hello World'
+description: 'Greet someone and record the time'
+inputs:
+  access-token:  # id of input
+    description: 'github token'
+    required: true
+  endpoint:
+    description: 'languages endpoint'
+    required: true
+  codeql-languages:
+    description: "languages supported by codeql"
+    required: false
+    default: '[ "cpp", "csharp", "go", "java", "javascript", "python", "ruby" ]'
+outputs:
+  languages: # id of output
+    description: 'languages for the matrix'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+   - ${{ inputs.access-token }}
+   - ${{ inputs.endpoint }}
+   - ${{ inputs.codeql-languages }}
+  # args:
+  #   - ${{ inputs.who-to-greet }}
