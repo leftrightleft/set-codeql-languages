@@ -24,10 +24,15 @@ def build_languages_list(languages):
     intersection = list(set(languages) & set(codeql_languages))
     return intersection
 
+def set_action_output(output_name, value) :
+    if "GITHUB_OUTPUT" in os.environ :
+        with open(os.environ["GITHUB_OUTPUT"], "a") as f :
+            print("{0}={1}".format(output_name, value), file=f)
+
 def main():
     languages = get_languages()
     output = build_languages_list(languages)
-    print(f"::set-output name=languages::{json.dumps(output)}")
+    set_action_output("languages", json.dumps(output))
 
 if __name__ == '__main__':
     main()
