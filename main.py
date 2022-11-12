@@ -26,7 +26,8 @@ def build_languages_list(languages):
 
 def main():
     languages = get_languages()
-    return build_languages_list(languages)
+    output = build_languages_list(languages)
+    print(f"::set-output name=languages::{json.dumps(output)}")
 
 if __name__ == '__main__':
     main()
