@@ -8,10 +8,10 @@ inputs:
   endpoint:
     description: 'languages endpoint'
     required: true
-  codeql-languages:
-    description: "languages supported by codeql"
-    required: false
-    default: '[ "cpp", "csharp", "go", "java", "javascript", "python", "ruby" ]'
+#   codeql-languages:
+#     description: "languages supported by codeql"
+#     required: false
+#     default: '["cpp", "csharp", "go", "java", "javascript", "python", "ruby"]'
 outputs:
   languages: # id of output
     description: 'languages for the matrix'
