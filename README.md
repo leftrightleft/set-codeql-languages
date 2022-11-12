@@ -16,7 +16,13 @@ Call this action before defining the CodeQL analyze job strategy, then set the m
 ```
 name: "CodeQL"
 
-on: workflow_dispatch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    - cron: '17 19 * * 6'
 
 jobs:
   create-matrix:
