@@ -7,4 +7,4 @@ COPY . /
 RUN pip install -r requirements.txt
 
 # Code file to execute when the docker container starts up (`entrypoint.sh`)
-ENTRYPOINT ["python", "/main.py", "${1}","${2}", "${3}"]
+ENTRYPOINT ["/entrypoint.sh"]
