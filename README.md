@@ -33,7 +33,7 @@ jobs:
     steps:
       - name: Get languages from repo
         id: get-languages
-        uses: leftrightleft/set-codeql-languages@main
+        uses: leftrightleft/set-codeql-languages@v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
           endpoint: ${{ github.event.repository.languages_url }}
