@@ -28,7 +28,8 @@ def set_action_output(output_name, value) :
     if "GITHUB_OUTPUT" in os.environ :
         with open(os.environ["GITHUB_OUTPUT"], "a") as f :
             print("{0}={1}".format(output_name, value), file=f)
-        print("$GITHUB_OUTPUT: ", os.environ["GITHUB_OUTPUT"])
+            for line in f:
+                print(line)
 
 def main():
     languages = get_languages()
