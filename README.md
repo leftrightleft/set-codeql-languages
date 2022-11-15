@@ -14,7 +14,7 @@ Call this action before defining the CodeQL analyze job strategy, then set the m
 
 **Example**
 ```
-name: "CodeQL"
+name: "CodeQL Auto Language"
 
 on:
   push:
@@ -26,13 +26,12 @@ on:
 
 jobs:
   create-matrix:
-    name: Set CodeQL Languages
     runs-on: ubuntu-latest
     outputs:
       matrix: ${{ steps.set-matrix.outputs.languages }}
     steps:
       - name: Get languages from repo
-        id: get-languages
+        id: set-matrix
         uses: leftrightleft/set-codeql-languages@v1
         with:
           access-token: ${{ secrets.GITHUB_TOKEN }}
@@ -40,6 +39,7 @@ jobs:
           
   analyze:
     needs: create-matrix
+    if: ${{ needs.create-matrix.outputs.matrix != '[]' }}
     name: Analyze
     runs-on: ubuntu-latest
     permissions:
@@ -50,20 +50,25 @@ jobs:
     strategy:
       fail-fast: false
       matrix: 
-        language: ${{ fromJSON(needs.create-matrix.outputs.matrix) }} # Set output from create-matrix job
-        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python' ]
+        language: ${{ fromJSON(needs.create-matrix.outputs.matrix) }}
+        # CodeQL supports [ 'cpp', 'csharp', 'go', 'java', 'javascript', 'python', 'ruby', 'kotlin' ]
+        # Learn more:
+        # https://docs.github.com/en/free-pro-team@latest/github/finding-security-vulnerabilities-and-errors-in-your-code/configuring-code-scanning#changing-the-languages-that-are-analyzed
 
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    # Initializes the CodeQL tools for scanning.
     - name: Initialize CodeQL
       uses: github/codeql-action/init@v2
       with:
         languages: ${{ matrix.language }}
-
+ 
+    # Autobuild attempts to build any compiled languages  (C/C++, C#, or Java).
     - name: Autobuild
-      uses: github/codeql-action/autobuild@v1
+      uses: github/codeql-action/autobuild@v2
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v2
+```
