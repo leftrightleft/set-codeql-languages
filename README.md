@@ -13,7 +13,7 @@ This action reads the repository languages API and adds all supported languages 
 Call this action before defining the CodeQL analyze job strategy, then set the matrix to the output from the action: `${{ fromJSON(needs.create-matrix.outputs.matrix) }}`
 
 **Example**
-```
+``` yaml
 name: "CodeQL Auto Language"
 
 on:
